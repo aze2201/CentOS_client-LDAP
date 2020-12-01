@@ -1,4 +1,5 @@
-<pre>
+
+```console
 ## INSTALLATION OF PACKAGES
 
 dnf install -y nss-pam-ldapd openssl sssd 
@@ -37,4 +38,4 @@ service nslcd start
 chkconfig sssd off 
 cd /etc/pam.d
 sed -i  's/pam_sss/pam_ldap/g' *
-</pre>
+```
