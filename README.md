@@ -1,19 +1,19 @@
 # CentOS_client-LDAP
 
 
-## INSTALLATION OF PACKAGES
+#INSTALLATION OF PACKAGES
 <pre>
 dnf install -y nss-pam-ldapd openssl sssd 
 #or 
 yum -y install nss-pam-ldapd openssl sssd
 </pre>
-## BACKUP NECESSARY PACKAGES
+# BACKUP NECESSARY PACKAGES
 <pre>
 cp /etc/nslcd.conf /etc/nslcd.conf.orig
 cp /etc/nsswitch.conf /etc/nsswitch.conf.orig
 cp -r /etc/pam.d /etc/pam.orig
 </pre>
-## UPDATE NSLCD service 
+# UPDATE NSLCD service 
 <pre>
 cat > /etc/nslcd.conf <<EOF
 uid nslcd
@@ -24,21 +24,21 @@ tls_reqcert never
 filter passwd (objectClass=top)
 EOF
 </pre>
-## CHECK NSLCD service
+# CHECK NSLCD service
 <pre>
 cat /etc/nslcd.conf
 </pre>
-## MAKE NSSWITCH to CHECK LDAP
+# MAKE NSSWITCH to CHECK LDAP
 <pre>
 sed -i 's/files/ldap files/g' /etc/nsswitch.conf
 </pre>
-## ENABLE AUTH to CHECK LDAP
+# ENABLE AUTH to CHECK LDAP
 <pre>
 authconfig --updateall --enableldap --enableldapauth
 cd /etc/pam.d
 sed -i  's/pam_sss/pam_ldap/g' *
 </pre>
-## RESTART nslcd service and make it startup.
+# RESTART nslcd service and make it startup.
 <pre>
 systemctl enable nslcd
 systemctl restart nslcd
