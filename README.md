@@ -28,6 +28,7 @@ EOF
 <pre>
 cat /etc/nslcd.conf
 </pre>
+
 # MAKE NSSWITCH to CHECK LDAP
 <pre>
 sed -i 's/files/ldap files/g' /etc/nsswitch.conf
