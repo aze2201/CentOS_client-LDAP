@@ -23,8 +23,9 @@ filter passwd (objectClass=top)
 EOF
 
 ## CHECK NSLCD service
+<pre>
 cat /etc/nslcd.conf
-
+</pre>
 ## MAKE NSSWITCH to CHECK LDAP
 sed -i 's/files/ldap files/g' /etc/nsswitch.conf
 ## ENABLE AUTH to CHECK LDAP
