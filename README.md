@@ -1,20 +1,20 @@
 
-```console
-## INSTALLATION OF PACKAGES
 
+# INSTALLATION OF PACKAGES
+```
 dnf install -y nss-pam-ldapd openssl sssd 
 #or 
 yum -y install nss-pam-ldapd openssl sssd
 ```
 
-## BACKUP NECESSARY PACKAGES
+# BACKUP NECESSARY PACKAGES
 ```
 cp /etc/nslcd.conf /etc/nslcd.conf.orig
 cp /etc/nsswitch.conf /etc/nsswitch.conf.orig
 cp -r /etc/pam.d /etc/pam.orig
 ```
 
-## UPDATE NSLCD service
+# UPDATE NSLCD service
 ```
 cat > /etc/nslcd.conf <<EOF
 uid nslcd
@@ -26,12 +26,12 @@ filter passwd (objectClass=top)
 EOF
 ```
 
-## CHECK NSLCD service
+# CHECK NSLCD service
 ```
 cat /etc/nslcd.conf
 ```
 
-## MAKE NSSWITCH to CHECK LDAP (Better change manualy.)
+# MAKE NSSWITCH to CHECK LDAP (Better change manualy.)
 ```
 sed -i 's/files/ldap files/g' /etc/nsswitch.conf
 ```
