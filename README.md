@@ -1,20 +1,20 @@
 
 
-INSTALLATION OF PACKAGES
+Installation of packages
 ```
 dnf install -y nss-pam-ldapd openssl sssd 
 #or 
 yum -y install nss-pam-ldapd openssl sssd
 ```
 
-# BACKUP NECESSARY PACKAGES
+Backup necessary packages
 ```
 cp /etc/nslcd.conf /etc/nslcd.conf.orig
 cp /etc/nsswitch.conf /etc/nsswitch.conf.orig
 cp -r /etc/pam.d /etc/pam.orig
 ```
 
-# UPDATE NSLCD service
+Update NSLCD service
 ```
 cat > /etc/nslcd.conf <<EOF
 uid nslcd
@@ -26,21 +26,20 @@ filter passwd (objectClass=top)
 EOF
 ```
 
-# CHECK NSLCD service
+Check NSLCD service
 ```
 cat /etc/nslcd.conf
 ```
 
-# MAKE NSSWITCH to CHECK LDAP (Better change manualy.)
+Update NSSSWITCH to auth with LDAP first (Better change manualy.)
 ```
 sed -i 's/files/ldap files/g' /etc/nsswitch.conf
 ```
-## ENABLE AUTH to CHECK LDAP
+Update system config to  AUTH with LDAP
 ```
 authconfig --updateall --enableldap --enableldapauth
 ```
-
-## RESTART nslcd service and make it startup.
+Restart NSLCD service and make it startup.
 ```
 systemctl enable nslcd
 systemctl restart nslcd
@@ -50,7 +49,7 @@ chkconfig nslcd on
 service nslcd start
 chkconfig sssd off
 ```
-## Channge pam from sss to ldap
+Channge PAM from SSS to LDAP
 ```
 cd /etc/pam.d
 sed -i  's/pam_sss/pam_ldap/g' *
