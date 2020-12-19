@@ -1,6 +1,6 @@
 
 
-# INSTALLATION OF PACKAGES
+INSTALLATION OF PACKAGES
 ```
 dnf install -y nss-pam-ldapd openssl sssd 
 #or 
